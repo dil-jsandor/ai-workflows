@@ -1,6 +1,7 @@
 import Sidebar from "../components/SideBar.tsx";
 import TopBar from "../components/TopBar.tsx";
 import AIWorkflowsTitleBar from "../components/AIWorkflowsTitleBar.tsx";
+import AIWorkflowsSearchAndFilterBar from "../components/AIWorkflowsSearchAndFilterBar.tsx";
 
 export default function Workflows() {
   return (
@@ -10,6 +11,7 @@ export default function Workflows() {
           <TopBar/>
           <div id="app" className="w-full h-[calc(100dvh-64px)] px-[36px]">
             <AIWorkflowsTitleBar />
+            <AIWorkflowsSearchAndFilterBar />
           </div>
         </div>
       </div>
