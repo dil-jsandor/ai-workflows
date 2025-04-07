@@ -10,6 +10,7 @@ export const generateRiskStep = async (input: string): Promise<string> => {
         const prompt = `
         You are a risk analysis assistant.
         The following input text is taken from an official corporate document. Your task is to carefully analyze the content and extract all but minimum one **potential security or business risks** based on the information in the text.
+        The generated risk data cannot contains PII or PHI.
         Please return your answer as a **JSON array**(even if there is only one risk you found) where each object represents a specific risk.
         **If you cannot find any, than just send only an empty JSON array as an answer**.
         
