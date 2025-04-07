@@ -68,3 +68,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.border-gradient {
+  border-image-source: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDYnIGhlaWdodD0nMzInIGZpbGw9J25vbmUnPjxyZWN0IHdpZHRoPScxMDUnIGhlaWdodD0nMzEnIHg9Jy41JyB5PScuNScgc3Ryb2tlPSd1cmwoI2EpJyByeD0nOS41Jy8+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSdhJyB4MT0nNC44NzQnIHgyPScyNC43NCcgeTE9JzEwLjgnIHkyPSc2Mi45NTMnIGdyYWRpZW50VW5pdHM9J3VzZXJTcGFjZU9uVXNlJz48c3RvcCBzdG9wLWNvbG9yPScjRDMyMjJBJy8+PHN0b3Agb2Zmc2V0PScuNjQnIHN0b3AtY29sb3I9JyNDMjQ3RkEnLz48c3RvcCBvZmZzZXQ9JzEnIHN0b3AtY29sb3I9JyM0RDFERDUnLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L3N2Zz4=");
+  border-image-slice: 8 !important;
+  border-image-width: 8px !important;
+  border-image-outset: 0 !important;
+}
