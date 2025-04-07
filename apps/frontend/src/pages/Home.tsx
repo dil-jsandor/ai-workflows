@@ -26,7 +26,7 @@ export default function Home() {
                 <IssuesAndReportingRow />
                 <div className="w-full h-[48px]"></div>
                 <EducationAndCertificationsRow />
-                <div className="w-full h-[48px]"></div>                <EducationAndCertificationsRow />
+                <div className="w-full h-[48px]"></div>
                 <ResourcesRow />
                 <div className="w-full h-[48px]"></div>
             </div>
