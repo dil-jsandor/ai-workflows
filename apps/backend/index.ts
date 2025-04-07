@@ -2,6 +2,8 @@ import fastify from "fastify";
 import { generateRiskStep } from "./steps/generate-risk-step";
 import { splitInputStep } from "./steps/split-input-step";
 import { generateReportStep } from "./steps/generate-report-step";
+import workflowsRoutes from "./routes/workflows";
+import {createTables} from "../database/init";
 
 const server = fastify();
 
@@ -23,10 +25,17 @@ Critical response to the collection was generally positive, and it has attracted
   return generatedData;
 });
 
-server.listen({ port: 8080 }, (err, address) => {
-  if (err) {
-    console.error(err);
+async function startServer() {
+  try {
+    await createTables();
+    server.register(workflowsRoutes);
+
+    await server.listen({ port: 8080 });
+    console.log(`Server listening at http://localhost:8080`);
+  } catch (err) {
+    console.error("Error starting the server:", err);
     process.exit(1);
   }
-  console.log(`Server listening at ${address}`);
-});
+}
+
+startServer();
