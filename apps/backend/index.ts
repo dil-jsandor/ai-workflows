@@ -5,14 +5,16 @@ import {splitInputStep} from "./steps/split-input-step";
 const server = fastify();
 
 server.get("/ping", async (request, reply) => {
-  console.log(request);
-  const fileContent = 'The World Economic Forum’s September 2024 Chief Economists Outlook found that most of the chief economists surveyed (54%) expect the condition of the global economy to remain unchanged over the next year, but four times as many expect conditions to weaken (37%) rather than to strengthen (9%). This outlook aligns closely with the latest IMF forecast, which has economic growth stable at 3.2% annually in 2024 and 2025. Even without accounting for the potential impacts of downside risks, this growth rate is tepid compared to the long-term average growth rate of 3.8% from 2000-2019.\n' +
-      'The IMF notes rising risks to the economy posed by conflict escalation, tariffs and trade policy uncertainty, lower migration, and the tightening of global financial conditions. The latter could pose a challenge to financial stability given that valuations are elevated in several asset classes and the amount of leverage used by financial institutions is significant. The rapid growth in the private credit market is one area to monitor. More generally, both government and private-sector debt levels continue to rise globally. There have been early signs that fiscal concerns could re-emerge over the next two years as markets will face a high volume of sovereign debt supply.\n' +
-      'Globally, Economic downturn tops the EOS global risk ranking in the next two years. This risk ranks first in five regions: Latin America and the Caribbean, Northern America, Oceania, South-Eastern Asia and Southern Asia. It also ranks first in three out of the four country income groups, with the only exception being lower-middle income countries. Respondents in 25 countries see Economic downturn as the leading risk, including developed economies such as the United States and United Kingdom, and emerging markets such as Brazil, Kenya and Malaysia (Figure 1.19).';
-  //const risk = await generateRiskStep(fileContent);
+  const fileContent = `
+  What a Merry-Go-Round is the eighteenth collection by British fashion designer Alexander McQueen, made for the Autumn/Winter 2001 season of his fashion house Alexander McQueen. The collection drew on imagery of clowns and carnivals, inspired by McQueen's feelings about childhood and his experiences in the fashion industry. The designs were influenced by military chic, cinema such as Nosferatu (1922) and Cabaret (1972), 1920s flapper fashion, and the French Revolution. The palette comprised dark colours complemented with neutrals and muted greens. The show marked the first appearance of the skull motif that became a signature of the brand.
+The collection's runway show was staged on 21 February 2001 at the Gatliff Road Warehouse in London, as part of London Fashion Week. It was McQueen's final show in London; all his future collections were presented in Paris. Sixty-two looks were presented in the main runway show, with at least six more in the finale.[a] The show was staged in a dark room with a carousel at the centre. During the finale, the lights came up to reveal piles of discarded childhood bric-à-brac at the rear of the stage, while models dressed as evil clowns cavorted around the stage, posing in their eveningwear.
+Critical response to the collection was generally positive, and it has attracted some academic analysis for the theme and messaging. Like McQueen's previous show Voss (Spring/Summer 2001), Merry-Go-Round served as a critique of the fashion industry, which he sometimes described as toxic and suffocating. It contained elements that several authors have taken as references to French luxury goods conglomerate LVMH and its management, with whom McQueen had a turbulent relationship. Ensembles from Merry-Go-Round have appeared in exhibitions such as the McQueen retrospective Alexander McQueen: Savage Beauty.
+`;
   const arrayOfParagraphs = await splitInputStep(fileContent);
   console.log(arrayOfParagraphs);
-  return arrayOfParagraphs;
+  const generatedData = await generateRiskStep(arrayOfParagraphs);
+  console.log(generatedData);
+  return generatedData;
 });
 
 server.listen({ port: 8080 }, (err, address) => {
