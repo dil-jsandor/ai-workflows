@@ -10,8 +10,11 @@ const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
 export default function App() {
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} />
-    </div>
+      <div style={{width: "100vw", height: "100vh"}}>
+        <h1 className="text-3xl font-bold underline">
+          Hello world!
+        </h1>
+        <ReactFlow nodes={initialNodes} edges={initialEdges}/>
+      </div>
   );
 }
