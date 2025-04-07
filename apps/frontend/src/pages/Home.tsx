@@ -1,18 +1,36 @@
-import { ReactFlow } from "@xyflow/react";
-
 import "@xyflow/react/dist/style.css";
-
-const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-];
-const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+import LeftMenu from "../components/LeftMenu.tsx";
+import TopBar from "../components/TopBar.tsx";
+import TopBanner from "../components/TopBanner.tsx";
+import RiskAndStrategyRow from "../components/RiskAndStrategyRow.tsx";
+import AuditAndAnalyticsRow from "../components/AuditAndAnalyticsRow.tsx";
+import ComplianceAndEthicsRow from "../components/ComplianceAndEthicsRow.tsx";
+import IssuesAndReportingRow from "../components/IssuesAndReportingRow.tsx";
+import EducationAndCertificationsRow from "../components/EducationAndCertificationsRow.tsx";
+import ResourcesRow from "../components/ResourcesRow.tsx";
 
 export default function Home() {
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} />
+    <div id="screen" className="w-screen h-screen flex bg-white text-black">
+        <LeftMenu />
+        <div id="app-container" className="flex flex-col w-[calc(100dvw-74px)] h-screen overflow-auto">
+            <TopBar />
+            <div id="app" className="w-[calc(100dvw-74px)] h-[calc(100dvh-64px)]">
+                <TopBanner />
+                <RiskAndStrategyRow />
+                <div className="w-full h-[48px]"></div>
+                <AuditAndAnalyticsRow />
+                <div className="w-full h-[48px]"></div>
+                <ComplianceAndEthicsRow />
+                <div className="w-full h-[48px]"></div>
+                <IssuesAndReportingRow />
+                <div className="w-full h-[48px]"></div>
+                <EducationAndCertificationsRow />
+                <div className="w-full h-[48px]"></div>                <EducationAndCertificationsRow />
+                <ResourcesRow />
+                <div className="w-full h-[48px]"></div>
+            </div>
+        </div>
     </div>
   );
 }
