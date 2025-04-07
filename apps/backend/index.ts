@@ -1,6 +1,7 @@
 import fastify from "fastify";
-import {generateRiskStep} from "./steps/generate-risk-step";
-import {splitInputStep} from "./steps/split-input-step";
+import { generateRiskStep } from "./steps/generate-risk-step";
+import { splitInputStep } from "./steps/split-input-step";
+import { generateReportStep } from "./steps/generate-report-step";
 
 const server = fastify();
 
@@ -14,7 +15,10 @@ Critical response to the collection was generally positive, and it has attracted
   console.log(arrayOfParagraphs);
   const generatedData = await generateRiskStep(arrayOfParagraphs);
   console.log(generatedData);
-  return generatedData;
+  const generatedReport = await generateReportStep(generatedData);
+  console.log(generatedReport);
+
+  return generatedReport;
 });
 
 server.listen({ port: 8080 }, (err, address) => {
