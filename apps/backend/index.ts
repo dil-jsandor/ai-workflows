@@ -17,8 +17,10 @@ Critical response to the collection was generally positive, and it has attracted
   console.log(generatedData);
   const generatedReport = await generateReportStep(generatedData);
   console.log(generatedReport);
+  const generatedSummary = await generateReportStep(generatedReport);
+  console.log(generatedSummary);
 
-  return generatedReport;
+  return generatedData;
 });
 
 server.listen({ port: 8080 }, (err, address) => {
