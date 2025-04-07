@@ -18,11 +18,8 @@ Critical response to the collection was generally positive, and it has attracted
   const generatedData = await generateRiskStep(arrayOfParagraphs);
   console.log(generatedData);
   const generatedReport = await generateReportStep(generatedData);
-  console.log(generatedReport);
-  const generatedSummary = await generateReportStep(generatedReport);
-  console.log(generatedSummary);
 
-  return generatedData;
+  return generatedReport;
 });
 
 async function startServer() {
