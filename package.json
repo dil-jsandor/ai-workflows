@@ -14,5 +14,8 @@
   },
   "type": "module",
   "packageManager": "pnpm@9.15.4",
-  "dependencies": {}
+  "devDependencies": {
+    "@types/pg": "^8.11.11",
+    "pg": "^8.14.1"
+  }
 }
