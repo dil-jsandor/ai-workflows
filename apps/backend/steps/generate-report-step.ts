@@ -1,7 +1,8 @@
-import {callBedrock} from "../ai-client";
+import { callBedrock } from "../ai-client";
 
 export const generateReportStep = async (input: string): Promise<string> => {
-    const prompt = `
+
+  const prompt = `
     You are a risk management expert. You will receive a text input. Based on this data, generate a comprehensive and professional document that will be used by executive stakeholders for risk management and strategy.
     Your task is to produce a cohesive, structured report that includes the following three sections:
     
@@ -39,6 +40,7 @@ export const generateReportStep = async (input: string): Promise<string> => {
     - Format cleanly using clear section headers, tables, or bullet lists.
     
     Your final output must be a professional, publishable risk management report ready for enterprise use. The input: ${input}`;
-    const response = await callBedrock(prompt);
-    return response.content[0].text;
+
+  const response = await callBedrock(prompt);
+  return response.content[0].text;
 };

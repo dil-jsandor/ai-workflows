@@ -14,7 +14,6 @@ const AIWorkflowCard = (props: AIWorkflowCardProps) => {
         <Card
             sx={{
                 width: "630px",
-                height: "283px",
                 borderRadius: 4,
                 border: "2px solid rgba(40, 46, 55, 0.05)",
                 position: "relative",
