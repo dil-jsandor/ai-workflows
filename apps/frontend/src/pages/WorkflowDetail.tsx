@@ -33,8 +33,11 @@ export default function WorkflowDetail() {
         {
           method: "POST",
           body: JSON.stringify({
-            input: result,
+            input: JSON.stringify(result),
           }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
       );
       result = await response.json();
