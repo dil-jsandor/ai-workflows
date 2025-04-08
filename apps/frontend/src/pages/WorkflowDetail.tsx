@@ -25,7 +25,7 @@ export default function WorkflowDetail() {
     const [generatedRisk, setGeneratedRisk] = useState<GeneratedRiskData | undefined>();
 
     const [workflow, setWorkflow] = useState<Workflow | undefined>();
-    const [input] = useState<string>('');
+    const [input, setInput] = useState<string>('');
     const [finishedSteps, setFinishedSteps] = useState<Step[]>([]);
     const [inProgressStep, setInProgressStep] = useState<Step | undefined>(undefined);
 
@@ -69,7 +69,7 @@ export default function WorkflowDetail() {
         }
 
         try {
-            const risk: GeneratedRiskData = result?.results[0];
+            const risk: GeneratedRiskData = result?.results.find((risk:GeneratedRiskData) => risk.name && risk.description && risk.category);
             console.log('risk', risk);
             setGeneratedRisk(risk);
         }
@@ -105,6 +105,7 @@ export default function WorkflowDetail() {
                                 finishedSteps={finishedSteps}
                                 inProgressStep={inProgressStep}
                                 onStart={() => startWorkflow()}
+                                onInputChanged={setInput}
                                 startButtonDisabled={input === ''}
                             />
                         </ReactFlowProvider>

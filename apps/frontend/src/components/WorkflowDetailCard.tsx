@@ -15,7 +15,8 @@ export type WorkflowDetailCardProps = {
   onStart: () => void;
   finishedSteps: Step[],
   inProgressStep: Step | undefined,
-  startButtonDisabled: boolean,
+  onInputChanged: (inputText: string) => void,
+  startButtonDisabled: boolean
 };
 
 const nodeTypes = {
@@ -27,8 +28,6 @@ const nodeTypes = {
 export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
     const [stepNodes, setStepNodes] = useState<any>();
     const [stepEdges, setStepEdges] = useState<any>();
-
-    const [input, setInput] = useState<string>('');
 
     const { fitView } = useReactFlow();
     useEffect(() => {
@@ -55,8 +54,10 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
             type: 'pdfInput',
             position: { x: 0, y: 0 },
             data: {
-                value: input,
-                onValueChanged: setInput
+                onValueChanged: (value: string) => {
+                    console.log('onValueChanged', value);
+                    props.onInputChanged(value);
+                }
             }
         });
 
@@ -79,7 +80,7 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
 
         setStepNodes(nodes);
         setStepEdges(edges);
-    }, [input, props]);
+    }, [props]);
 
   return (
     <div className="p-[26px] flex flex-col border border-gray-200 rounded-[12px] gap-y-[8px] w-full h-full">
@@ -158,25 +159,24 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
         </Typography>
       </Box>
 
-      <div id="react-flow-container" className="h-full w-full">
-        <ReactFlow
-            nodes={stepNodes}
-            edges={stepEdges}
-            nodeTypes={nodeTypes}
-            nodesDraggable={false}
-            nodesConnectable={false}
-            elementsSelectable={false}
-            panOnDrag={false}
-            proOptions={{ hideAttribution: true }}
-        />
-      </div>
+        <div id="react-flow-container" className="h-full w-full">
+            <ReactFlow
+                nodes={stepNodes}
+                edges={stepEdges}
+                nodeTypes={nodeTypes}
+                nodesDraggable={false}
+                nodesConnectable={false}
+                panOnDrag={false}
+                proOptions={{hideAttribution: true}}
+            />
+        </div>
 
-      <div className="flex justify-center items-center w-full">
-        <Button
-          variant="outlined"
-          sx={{
-            fontFamily: "'Plus Jakarta Sans', Helvetica",
-            fontWeight: 800,
+        <div className="flex justify-center items-center w-full">
+            <Button
+                variant="outlined"
+                sx={{
+                    fontFamily: "'Plus Jakarta Sans', Helvetica",
+                    fontWeight: 800,
             fontSize: "18px",
             borderRadius: "8px",
             height: "60px",
