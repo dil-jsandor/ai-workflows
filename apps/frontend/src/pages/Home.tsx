@@ -1,5 +1,4 @@
 import "@xyflow/react/dist/style.css";
-import LeftMenu from "../components/LeftMenu.tsx";
 import TopBar from "../components/TopBar.tsx";
 import TopBanner from "../components/TopBanner.tsx";
 import RiskAndStrategyRow from "../components/RiskAndStrategyRow.tsx";
@@ -8,15 +7,19 @@ import ComplianceAndEthicsRow from "../components/ComplianceAndEthicsRow.tsx";
 import IssuesAndReportingRow from "../components/IssuesAndReportingRow.tsx";
 import EducationAndCertificationsRow from "../components/EducationAndCertificationsRow.tsx";
 import ResourcesRow from "../components/ResourcesRow.tsx";
+import Sidebar from "../components/SideBar.tsx";
+import AIWorkflowsRow from "../components/AIWorkflowsRow.tsx";
 
 export default function Home() {
   return (
     <div id="screen" className="w-screen h-screen flex bg-white text-black">
-        <LeftMenu />
-        <div id="app-container" className="flex flex-col w-[calc(100dvw-74px)] h-screen overflow-auto">
+        <Sidebar />
+        <div id="app-container" className="flex flex-col w-full h-screen overflow-auto">
             <TopBar />
-            <div id="app" className="w-[calc(100dvw-74px)] h-[calc(100dvh-64px)]">
+            <div id="app" className="w-full h-[calc(100dvh-64px)]">
                 <TopBanner />
+                <AIWorkflowsRow />
+                <div className="w-full h-[48px]"></div>
                 <RiskAndStrategyRow />
                 <div className="w-full h-[48px]"></div>
                 <AuditAndAnalyticsRow />
@@ -26,7 +29,7 @@ export default function Home() {
                 <IssuesAndReportingRow />
                 <div className="w-full h-[48px]"></div>
                 <EducationAndCertificationsRow />
-                <div className="w-full h-[48px]"></div>                <EducationAndCertificationsRow />
+                <div className="w-full h-[48px]"></div>
                 <ResourcesRow />
                 <div className="w-full h-[48px]"></div>
             </div>

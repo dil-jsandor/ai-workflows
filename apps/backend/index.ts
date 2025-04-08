@@ -4,10 +4,15 @@ import { splitInputStep } from "./steps/split-input-step";
 import { generateReportStep } from "./steps/generate-report-step";
 import {createTables} from "../database/init";
 import {getWorkflowById} from "./routes/get-workflow-by-id";
-import workflowsRoutes from "./routes/workflows";
 import getWorkflowsRoute from "./routes/get-workflows-route";
+import cors from "@fastify/cors";
 
 const server = fastify();
+
+server.register(cors, {
+  origin: "http://localhost:5173", // Replace with your frontend's origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+});
 
 server.get("/ping", async (request, reply) => {
   const fileContent = `
@@ -28,7 +33,6 @@ async function startServer() {
   try {
     await createTables();
     server.register(getWorkflowById);
-    server.register(workflowsRoutes);
     server.register(getWorkflowsRoute);
 
     await server.listen({ port: 8080 });
