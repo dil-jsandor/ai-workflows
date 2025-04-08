@@ -28,7 +28,7 @@ export const generateRiskStep = async (input: string): Promise<string> => {
         **If you cannot find any, than just send only an empty JSON array as an answer**.
         
         Each risk object should contain the following keys:
-        - "title": a short, descriptive name for the risk, has to be unique
+        - "name": a short, descriptive name for the risk, has to be unique
         - "description": a brief explanation of the nature of the risk
         - "category": the appropriate category based on the list below
         

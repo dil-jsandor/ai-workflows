@@ -2,7 +2,7 @@ import {callBedrock} from "../ai-client";
 
 export const generateReportStep = async (input: string): Promise<string> => {
     const prompt = `
-    You are a risk management expert. You will receive a JSON array of identified enterprise risks. Each risk includes a "title", a "description", and a "category". Based on this data, generate a comprehensive and professional document that will be used by executive stakeholders for risk management and strategy.
+    You are a risk management expert. You will receive a text input. Based on this data, generate a comprehensive and professional document that will be used by executive stakeholders for risk management and strategy.
     Your task is to produce a cohesive, structured report that includes the following three sections:
     
     ---
@@ -13,9 +13,9 @@ export const generateReportStep = async (input: string): Promise<string> => {
     ---
     
     2. Risk Register
-    For each risk from the input JSON, create an entry with the following fields:
+    For each risk from the input, create an entry with the following fields:
     - Title
-    - Category
+    - Category (for example categories: "Operational", "IT/Infosec", "Financial", "Regulatory/Compliance")
     - Description
     - Assumed Risk Level (Low / Medium / High) — infer this from the nature of the risk
     - Suggested Owner — e.g., CISO, Legal, Operations Manager, CFO, etc.
@@ -35,11 +35,10 @@ export const generateReportStep = async (input: string): Promise<string> => {
 
     Important Instructions:
     - Do not modify or omit any risk.
-    - Do not require additional data — work only with the JSON input.
     - Keep the tone formal and executive-appropriate.
     - Format cleanly using clear section headers, tables, or bullet lists.
     
-    Your final output must be a professional, publishable risk management report ready for enterprise use. The JSON: ${input}`;
+    Your final output must be a professional, publishable risk management report ready for enterprise use. The input: ${input}`;
     const response = await callBedrock(prompt);
     return response.content[0].text;
 };
