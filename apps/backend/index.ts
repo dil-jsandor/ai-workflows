@@ -6,8 +6,15 @@ import {createTables} from "../database/init";
 import {getWorkflowById} from "./routes/get-workflow-by-id";
 import getWorkflowsRoute from "./routes/get-workflows-route";
 import {executeWorkflowRoute} from "./routes/execute-workflow-route";
+import cors from "@fastify/cors";
+
 
 const server = fastify();
+
+server.register(cors, {
+  origin: "http://localhost:5173", // Replace with your frontend's origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+});
 
 server.get("/ping", async (request, reply) => {
   const fileContent = `
