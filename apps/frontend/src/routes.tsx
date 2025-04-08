@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import Workflows from "./pages/Workflows";
 import Home from "./pages/Home";
 import CreateWorkflows from "./pages/CreateWorkflow";
@@ -21,5 +20,5 @@ export const router = createBrowserRouter([
   {
     path: "/create-workflows",
     element: <CreateWorkflows />,
-  },
+  }
 ]);
