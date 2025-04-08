@@ -8,6 +8,7 @@ import IssuesAndReportingRow from "../components/IssuesAndReportingRow.tsx";
 import EducationAndCertificationsRow from "../components/EducationAndCertificationsRow.tsx";
 import ResourcesRow from "../components/ResourcesRow.tsx";
 import Sidebar from "../components/SideBar.tsx";
+import AIWorkflowsRow from "../components/AIWorkflowsRow.tsx";
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
             <TopBar />
             <div id="app" className="w-full h-[calc(100dvh-64px)]">
                 <TopBanner />
+                <AIWorkflowsRow />
+                <div className="w-full h-[48px]"></div>
                 <RiskAndStrategyRow />
                 <div className="w-full h-[48px]"></div>
                 <AuditAndAnalyticsRow />
