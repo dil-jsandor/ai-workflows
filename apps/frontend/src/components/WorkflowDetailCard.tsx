@@ -1,53 +1,34 @@
-import CalendarToday from "@mui/icons-material/CalendarToday";
-import Info from "@mui/icons-material/Info";
-import Person from "@mui/icons-material/Person";
-import { Box, Button, Card, Divider, Stack, Typography } from "@mui/material";
 import {Workflow} from "../types/workflow.ts";
-import {Link} from 'react-router-dom';
+import {Box, Button, Typography} from "@mui/material";
+import CalendarToday from "@mui/icons-material/CalendarToday";
+import Person from "@mui/icons-material/Person";
+import Info from "@mui/icons-material/Info";
+import {ReactFlow} from "@xyflow/react";
 
-export type AIWorkflowCardProps = {
-    workflow: Workflow
-}
+export type WorkflowDetailCardProps = {
+  workflow: Workflow
+};
 
-const AIWorkflowCard = (props: AIWorkflowCardProps) => {
+export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
+    const initialNodes = [
+        { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+        { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+    ];
+    const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+
     return (
-        <Card
-            sx={{
-                width: "630px",
-                borderRadius: 4,
-                border: "2px solid rgba(40, 46, 55, 0.05)",
-                position: "relative",
-                p: 3,
-                boxShadow: 'none'
-            }}
-        >
-            <Box sx={{
-                display: 'flex'
-            }}>
+        <div className="p-[26px] flex flex-col border border-gray-200 rounded-[12px] gap-y-[8px] w-full h-full">
+            <div id="workflow-logo-and-title" className="flex items-center gap-x-[8px]">
                 <Box
                     component="img"
                     src="/workflow.svg"
                     alt="Workflow"
                     sx={{width: 27, height: 27}}
                 />
-                <Typography
-                    variant="h5"
-                    sx={{
-                        fontFamily: "'Plus Jakarta Sans', Helvetica",
-                        fontWeight: 600,
-                        color: "#282e37",
-                        fontSize: "21px",
-                        mb: 2,
-                        ml: 1,
-                    }}
-                >
-                    {props.workflow.title}
-                </Typography>
-            </Box>
+                <span className="font-semibold text-[25px]">{props.workflow.title}</span>
+            </div>
 
-            <Divider sx={{ mb: 2 }} />
-
-            <Stack spacing={2} sx={{ mb: 3 }}>
+            <div id="workflow-date-and-owner" className="flex gap-x-[8px] items-center">
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <CalendarToday
                         sx={{ fontSize: 15, color: "rgba(40, 46, 55, 0.6)", mr: 1 }}
@@ -79,7 +60,8 @@ const AIWorkflowCard = (props: AIWorkflowCardProps) => {
                         Owned by Platformer
                     </Typography>
                 </Box>
-            </Stack>
+
+            </div>
 
             <Box sx={{ display: "flex", alignItems: "flex-start", mb: 4 }}>
                 <Info
@@ -92,55 +74,39 @@ const AIWorkflowCard = (props: AIWorkflowCardProps) => {
                 <Typography
                     sx={{
                         fontFamily: "'Plus Jakarta Sans', Helvetica",
-                        fontWeight: 550,
+                        fontWeight: 500,
                         color: "#282e37",
-                        fontSize: "12px",
+                        fontSize: "14px",
                         textAlign: "justify",
                         lineHeight: "13.9px",
-                        width: "585px",
+                        width: "100%",
                     }}
                 >
                     {props.workflow.description}
                 </Typography>
             </Box>
 
-            <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+            <div id="react-flow-container" className="h-full w-full">
+                <ReactFlow nodes={initialNodes} edges={initialEdges} />
+            </div>
+
+            <div className="flex justify-center items-center w-full">
                 <Button
                     variant="outlined"
                     sx={{
                         fontFamily: "'Plus Jakarta Sans', Helvetica",
                         fontWeight: 800,
-                        fontSize: "10px",
+                        fontSize: "18px",
                         borderRadius: "8px",
-                        height: "32px",
-                        width: "78px",
+                        height: "60px",
+                        width: "400px",
                         border: "2px solid #282e37",
                         color: '#282E37'
                     }}
                 >
-                    EDIT
+                    START
                 </Button>
-                <Link to={`/workflows/${props.workflow.workflowId}`}>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            fontFamily: "'Plus Jakarta Sans', Helvetica",
-                            fontWeight: 800,
-                            fontSize: "10px",
-                            borderRadius: "8px",
-                            height: "32px",
-                            width: "122px",
-                            backgroundColor: "#282e37",
-                            border: "2px solid #282e37",
-                            textWrap: "nowrap"
-                        }}
-                    >
-                        USE WORKFLOW
-                    </Button>
-                </Link>
-            </Box>
-        </Card>
+            </div>
+        </div>
     );
-};
-
-export default AIWorkflowCard;
+}
