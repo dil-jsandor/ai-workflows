@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {FormatBold} from "@mui/icons-material";
 import {FormatItalic} from "@mui/icons-material";
 import Close from "@mui/icons-material/Close";
@@ -21,17 +21,24 @@ import {
 } from "@mui/material";
 import {FormatListBulleted, FormatListNumbered, Undo, Redo} from "@mui/icons-material";
 
-type GeneratedRiskData = {
-    name: string;
+export type GeneratedRiskData = {
+    title: string;
     category: string;
     description: string;
 };
 
-export default function RiskManagerSidebar({ open, onClose, generatedRisk = { name: '', category: '', description: '' } }: { open: boolean, onClose: () => void, generatedRisk?: GeneratedRiskData }) {
-    const [name, setName] = useState(generatedRisk.name);
-    const [riskId, setRiskId] = useState(`${generatedRisk.name}_${generatedRisk.name.length + 1}`);
+export default function RiskManagerSidebar({ open, onClose, generatedRisk = { title: '', category: '', description: '' } }: { open: boolean, onClose: () => void, generatedRisk?: GeneratedRiskData }) {
+    const [name, setName] = useState(generatedRisk.title);
+    const [riskId, setRiskId] = useState(`${generatedRisk.title}_${(generatedRisk.title?.length ?? 0) + 1}`);
     const [riskCategory, setRiskCategory] = useState(generatedRisk.category);
     const [riskDescription, setRiskDescription] = useState(generatedRisk.description);
+
+    useEffect(() => {
+        setName(generatedRisk.title);
+        setRiskId(`${generatedRisk.title}_${(generatedRisk.title?.length ?? 0) + 1}`);
+        setRiskCategory(generatedRisk.category);
+        setRiskDescription(generatedRisk.description);
+    }, [generatedRisk]);
 
     return (
         <Drawer
