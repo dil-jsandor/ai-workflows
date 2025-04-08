@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import CalendarToday from "@mui/icons-material/CalendarToday";
 import Person from "@mui/icons-material/Person";
 import Info from "@mui/icons-material/Info";
-import { ReactFlow } from "@xyflow/react";
+import {ReactFlow, useReactFlow} from "@xyflow/react";
 import PdfInputNode from "../nodes/PdfInputNode.tsx";
 import {useEffect, useState} from "react";
 import StepNode from "../nodes/StepNode.tsx";
@@ -14,7 +14,8 @@ export type WorkflowDetailCardProps = {
   workflow: Workflow;
   onStart: () => void;
   finishedSteps: Step[],
-  inProgressStep: Step | undefined
+  inProgressStep: Step | undefined,
+  startButtonDisabled: boolean,
 };
 
 const nodeTypes = {
@@ -28,6 +29,11 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
     const [stepEdges, setStepEdges] = useState<any>();
 
     const [input, setInput] = useState<string>('');
+
+    const { fitView } = useReactFlow();
+    useEffect(() => {
+        fitView()
+    }, [stepNodes, fitView]);
 
     useEffect(() => {
         const nodes: any[] = props.workflow.steps.map((step, index) => ({
@@ -153,7 +159,16 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
       </Box>
 
       <div id="react-flow-container" className="h-full w-full">
-        <ReactFlow nodes={stepNodes} edges={stepEdges} nodeTypes={nodeTypes} />
+        <ReactFlow
+            nodes={stepNodes}
+            edges={stepEdges}
+            nodeTypes={nodeTypes}
+            nodesDraggable={false}
+            nodesConnectable={false}
+            elementsSelectable={false}
+            panOnDrag={false}
+            proOptions={{ hideAttribution: true }}
+        />
       </div>
 
       <div className="flex justify-center items-center w-full">
@@ -169,6 +184,7 @@ export default function WorkflowDetailCard(props: WorkflowDetailCardProps) {
             border: "2px solid #282e37",
             color: "#282E37",
           }}
+          disabled={props.startButtonDisabled}
           onClick={() => props.onStart()}
         >
           START
