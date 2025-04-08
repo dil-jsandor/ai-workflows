@@ -5,7 +5,9 @@ import { generateReportStep } from "./steps/generate-report-step";
 import {createTables} from "../database/init";
 import {getWorkflowById} from "./routes/get-workflow-by-id";
 import getWorkflowsRoute from "./routes/get-workflows-route";
+import {executeWorkflowRoute} from "./routes/execute-workflow-route";
 import cors from "@fastify/cors";
+
 
 const server = fastify();
 
@@ -26,12 +28,13 @@ Critical response to the collection was generally positive, and it has attracted
   console.log(generatedData);
   const generatedReport = await generateReportStep(generatedData);
 
-  return generatedReport;
+  return generatedData;
 });
 
 async function startServer() {
   try {
     await createTables();
+    server.register(executeWorkflowRoute);
     server.register(getWorkflowById);
     server.register(getWorkflowsRoute);
 
