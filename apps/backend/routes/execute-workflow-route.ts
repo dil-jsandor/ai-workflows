@@ -12,7 +12,6 @@ export const executeWorkflowRoute = (fastifyInstance: FastifyInstance) => {
         Params: { id: string },
         Body: ExecuteStepRequestBody
     }>('/steps/:id/execute', async (request, reply) => {
-        console.log("Workflows query: ", request.params);
 
         try {
             const {id} = request.params;
@@ -24,9 +23,10 @@ export const executeWorkflowRoute = (fastifyInstance: FastifyInstance) => {
                  WHERE step_id = $1`, [id]
             );
 
-            const {stepName} = result.rows[0].name;
+            const name = result.rows[0].name;
 
-            const step = stepFunctions[stepName];
+            const step = stepFunctions[name];
+
             const stepResult = await step(input, prompt);
 
             return reply.send(stepResult);

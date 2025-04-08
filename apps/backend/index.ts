@@ -21,7 +21,7 @@ Critical response to the collection was generally positive, and it has attracted
   console.log(generatedData);
   const generatedReport = await generateReportStep(generatedData);
 
-  return generatedReport;
+  return generatedData;
 });
 
 async function startServer() {
