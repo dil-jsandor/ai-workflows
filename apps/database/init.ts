@@ -3,9 +3,9 @@ import pool from "./db";
 export async function createTables() {
     try {
         await pool.query(`
-      CREATE TABLE IF NOT EXISTS workflow (
+      CREATE TABLE IF NOT EXISTS workflows (
         workflow_id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
+        title TEXT NOT NULL,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
@@ -18,7 +18,7 @@ export async function createTables() {
         description TEXT,
         position INTEGER NOT NULL,
         workflow_id INTEGER NOT NULL,
-        FOREIGN KEY (workflow_id) REFERENCES workflow(workflow_id)
+        FOREIGN KEY (workflow_id) REFERENCES workflows(workflow_id)
       );
     `);
 

@@ -2,8 +2,8 @@ import fastify from "fastify";
 import { generateRiskStep } from "./steps/generate-risk-step";
 import { splitInputStep } from "./steps/split-input-step";
 import { generateReportStep } from "./steps/generate-report-step";
-import workflowsRoutes from "./routes/workflows";
 import {createTables} from "../database/init";
+import {getWorkflowById} from "./routes/get-workflow-by-id";
 
 const server = fastify();
 
@@ -25,7 +25,7 @@ Critical response to the collection was generally positive, and it has attracted
 async function startServer() {
   try {
     await createTables();
-    server.register(workflowsRoutes);
+    server.register(getWorkflowById);
 
     await server.listen({ port: 8080 });
     console.log(`Server listening at http://localhost:8080`);
