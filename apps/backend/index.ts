@@ -4,6 +4,8 @@ import { splitInputStep } from "./steps/split-input-step";
 import { generateReportStep } from "./steps/generate-report-step";
 import {createTables} from "../database/init";
 import {getWorkflowById} from "./routes/get-workflow-by-id";
+import workflowsRoutes from "./routes/workflows";
+import getWorkflowsRoute from "./routes/get-workflows-route";
 
 const server = fastify();
 
@@ -26,6 +28,8 @@ async function startServer() {
   try {
     await createTables();
     server.register(getWorkflowById);
+    server.register(workflowsRoutes);
+    server.register(getWorkflowsRoute);
 
     await server.listen({ port: 8080 });
     console.log(`Server listening at http://localhost:8080`);
