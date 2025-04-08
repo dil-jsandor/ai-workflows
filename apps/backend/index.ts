@@ -2,9 +2,10 @@ import fastify from "fastify";
 import { generateRiskStep } from "./steps/generate-risk-step";
 import { splitInputStep } from "./steps/split-input-step";
 import { generateReportStep } from "./steps/generate-report-step";
+import {createTables} from "../database/init";
+import {getWorkflowById} from "./routes/get-workflow-by-id";
 import workflowsRoutes from "./routes/workflows";
 import getWorkflowsRoute from "./routes/get-workflows-route";
-import { createTables } from "../database/init";
 
 const server = fastify();
 
@@ -26,6 +27,7 @@ Critical response to the collection was generally positive, and it has attracted
 async function startServer() {
   try {
     await createTables();
+    server.register(getWorkflowById);
     server.register(workflowsRoutes);
     server.register(getWorkflowsRoute);
 
