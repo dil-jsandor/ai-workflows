@@ -1,3 +1,10 @@
+import SmallSidebar from "../components/SmallSideBar";
+
 export default function WorkflowDetail() {
-  return <h1>Workflow detail</h1>;
+  return (
+    <div>
+      <SmallSidebar />
+      <h1>Workflow detail</h1>;
+    </div>
+  );
 }
